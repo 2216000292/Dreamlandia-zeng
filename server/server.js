@@ -19,7 +19,7 @@ const editMaintenanceHandler = require("./editMaintenanceHandler");
 const checkoutHandler = require("./checkoutHandler");
 
 const corsOptions = {
-  origin: ['https://dreamlandia.vercel.app', 'http://localhost:5173'],
+  origin: ['http://localhost:5173', 'https://dreamlandia-zeng.vercel.app/']
   credentials: true,
 };
 
