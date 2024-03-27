@@ -25,7 +25,8 @@ const EmployeeLogin = () => {
     try {
       await auth.employeeLogin({ email, password });
       console.log("employeeLogin.jsx is called");
-      navigate(`/${auth.employee.SRole === "Staff"? "employee":"manager"}/dashboard`, { replace: true });
+      // navigate(`/${auth.employee.SRole === "Staff"? "employee":"manager"}/dashboard`, { replace: true });
+       navigate(`/dashboard`, { replace: true });
     } catch (error) {
       console.error('employee Login failed:', error);
     }
