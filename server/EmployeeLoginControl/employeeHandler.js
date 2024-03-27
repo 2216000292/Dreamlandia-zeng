@@ -11,6 +11,7 @@ async function employeeLoginHandler(req, res) {
     const employee = employees[0];
     console.log('employee:', employee);
     if (employee) {
+      res.setHeader('Set-Cookie', 'token=; HttpOnly; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT'); // logout regular user if exist in cookies
       const token = jwt.sign({ employeeId: employee.StaffID, userType: 'employee' }, process.env.JWT_SECRET, { expiresIn: '1h' });
       const isProduction = process.env.NODE_ENV === 'production';
       const cookieAttributes = `token=${token}; HttpOnly; Path=/;` + 
