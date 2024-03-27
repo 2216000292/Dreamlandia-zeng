@@ -12,7 +12,11 @@ async function employeeLoginHandler(req, res) {
     console.log('employee:', employee);
     if (employee) {
       const token = jwt.sign({ employeeId: employee.StaffID, userType: 'employee' }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Path=/;`);
+      const isProduction = process.env.NODE_ENV === 'production';
+      const cookieAttributes = `token=${token}; HttpOnly; Path=/;` + 
+                               (isProduction ? ' Secure; SameSite=None' : '');
+      
+      res.setHeader('Set-Cookie', cookieAttributes);
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ message: 'Login successful', employee, token }));
     } else {
