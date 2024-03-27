@@ -12,7 +12,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "dotenv": "^16.4.5",
     "nodemon": "^3.1.0"
   },
   "dependencies": {
@@ -20,6 +19,7 @@
     "cors": "^2.8.5",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.2",
-    "utils": "^0.2.2"
+    "utils": "^0.2.2",
+    "dotenv": "^16.4.5"
   }
 }
