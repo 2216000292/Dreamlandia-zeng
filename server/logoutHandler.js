@@ -6,7 +6,7 @@ function logoutHandler(req, res) {
         'HttpOnly',
         'Path=/',
         isProduction ? 'Secure' : '',
-        'SameSite=None',
+        isProduction ? 'SameSite=None' : '',
         'Expires=Thu, 01 Jan 1970 00:00:00 GMT'
     ].filter(Boolean).join('; ');
     res.setHeader('Set-Cookie', cookieAttributes);
