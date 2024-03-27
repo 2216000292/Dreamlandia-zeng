@@ -20,16 +20,22 @@ const EmployeeLogin = () => {
   const auth = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (auth.employee && auth.employee.SRole) {
+      navigate(`/${auth.employee.SRole === "Staff" ? "employee" : "manager"}/dashboard`, { replace: true });
+    }
+  }, [auth.employee, navigate]);
+
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
       await auth.employeeLogin({ email, password });
       console.log("employeeLogin.jsx is called");
-      if (auth.employee && auth.employee.SRole){
-        navigate(`/${auth.employee.SRole === "Staff"? "employee":"manager"}/dashboard`, { replace: true });
-      }else{
-        navigate('/employee/login', { replace: true });
-      }
+      // if (auth.employee && auth.employee.SRole){
+      //   navigate(`/${auth.employee.SRole === "Staff"? "employee":"manager"}/dashboard`, { replace: true });
+      // }else{
+      //   navigate('/employee/login', { replace: true });
+      // }
     } catch (error) {
       console.error('employee Login failed:', error);
     }
