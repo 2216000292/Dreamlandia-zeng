@@ -13,6 +13,7 @@ async function loginHandler(req, res) {
         const user = users[0];
 
         if (user) {
+            res.setHeader('Set-Cookie', 'token=; HttpOnly; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT');
             const token = jwt.sign({ userId: user.UserID, userType: 'user' }, process.env.JWT_SECRET, { expiresIn: '1h' });
             console.log('token is initiated in loginHandler.js : ', token);
             console.log('user is initiated in loginHandler.js : ', user);
