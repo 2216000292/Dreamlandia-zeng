@@ -2,6 +2,7 @@
 const pool = require('./database');
 const getPostData = require('./postDataParser');
 const jwt = require('jsonwebtoken');
+const isProduction = process.env.NODE_ENV === 'production';
 
 async function loginHandler(req, res) {
     try {
@@ -17,7 +18,9 @@ async function loginHandler(req, res) {
             console.log('user is initiated in loginHandler.js : ', user);
             // res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Secure; SameSite=None`);
             // res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Path=/;`);
-            res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Path=/; SameSite=None; Secure`);
+            // res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Path=/; SameSite=None; Secure`);
+            const cookieSettings = `token=${token}; HttpOnly; Path=/;` + (isProduction ? ' Secure; SameSite=None' : '');
+            res.setHeader('Set-Cookie', cookieSettings);
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ message: 'Login successful', user, token }));
         } else {
