@@ -24,7 +24,7 @@ const Navbar = () => {
                                 event.preventDefault();
                                 await auth.logout();
                             }}>Logout</NavLink>
-                        }                    
+                        }
                 </nav>
             </div>
        </div>

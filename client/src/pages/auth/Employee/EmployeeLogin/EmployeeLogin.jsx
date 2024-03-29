@@ -29,8 +29,11 @@ const EmployeeLogin = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      await auth.employeeLogin({ email, password });
+      const isloginSuccessful = await auth.employeeLogin({ email, password });
       console.log("employeeLogin.jsx is called");
+      // if (isloginSuccessful){
+      //   navigate(`/${auth.employee.SRole === "Staff"? "employee":"manager"}/dashboard`, { replace: true });
+      // }
       // if (auth.employee && auth.employee.SRole){
       //   navigate(`/${auth.employee.SRole === "Staff"? "employee":"manager"}/dashboard`, { replace: true });
       // }else{
@@ -38,6 +41,7 @@ const EmployeeLogin = () => {
       // }
     } catch (error) {
       console.error('employee Login failed:', error);
+      alert(error.message);
     }
   };
 

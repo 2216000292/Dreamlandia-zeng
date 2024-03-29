@@ -26,7 +26,7 @@ const corsOptions = {
 const server = http.createServer((req, res) => {
   cors(corsOptions)(req, res, () => {
     if (req.method === 'OPTIONS') {
-      res.writeHead(200);
+      res.writeHead(204);
       res.end();
       return;
     }
@@ -35,29 +35,19 @@ const server = http.createServer((req, res) => {
       console.log('api/user is called in server.js');
       authenticateToken(req, res, () => {
         if (req.user) {
-          console.log("entering if req.user...")
           if (req.user.userType === 'user') {
-            console.log("entering if req.user.userType is user...")
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(req.user));
           } else {
-            console.log("entering if req.user.userType NOT user...")
             res.writeHead(403, { 'Content-Type': 'application/json' });
-            // res.end(JSON.stringify({ message: 'Forbidden' }));
+            res.end(JSON.stringify({ message: 'Forbidden' }));
           }
         } else {
-          console.log("entering if NOT req.user...")
           res.writeHead(200, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify(null));
         }
       });
     }
-     // if (req.url === '/auth/signup' && req.method === 'POST') {
-  //   signupHandler(req, res);
-  // } else {
-  //   res.writeHead(404, { 'Content-Type': 'application/json' });
-  //   res.end(JSON.stringify({ message: 'Route not found' }));
-  // }
     else if (req.url === '/api/employee' && req.method === 'GET') {
       console.log('api/employee is called in server.js');
       authenticateToken(req, res, () => {
@@ -67,7 +57,7 @@ const server = http.createServer((req, res) => {
             res.end(JSON.stringify(req.user));
           } else {
             res.writeHead(403, { 'Content-Type': 'application/json' });
-            // res.end(JSON.stringify({ message: 'Forbidden' }));
+            res.end(JSON.stringify({ message: 'Forbidden' }));
           }
         } else {
           res.writeHead(200, { 'Content-Type': 'application/json' });
